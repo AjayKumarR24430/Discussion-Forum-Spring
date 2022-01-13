@@ -3,9 +3,7 @@ package com.demo.discussionForum.security;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,9 +26,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenProvider jwtTokenUtil;
-    
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Override
     protected void doFilterInternal(final HttpServletRequest req, final HttpServletResponse res, final FilterChain chain) throws IOException, ServletException {
@@ -57,14 +52,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-//            	final Authentication authentication = authenticationManager.authenticate(
-//                        new UsernamePasswordAuthenticationToken(
-//                                userDetails.getUsername(),
-//                                userDetails.getPassword()
-//                        )
-//                );
-//                SecurityContextHolder.getContext().setAuthentication(authentication);
-//                
                 UsernamePasswordAuthenticationToken authentication = jwtTokenUtil.getAuthentication(authToken, SecurityContextHolder.getContext().getAuthentication(), userDetails);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
                 logger.info("authenticated user " + username + ", setting security context");

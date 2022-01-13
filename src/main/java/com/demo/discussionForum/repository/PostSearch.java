@@ -4,7 +4,6 @@ import com.demo.discussionForum.model.Post;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.stereotype.Repository;
-import org.hibernate.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

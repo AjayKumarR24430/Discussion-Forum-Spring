@@ -105,7 +105,7 @@ public class Post {
 	}
 
 	@NotNull
-    @Min(0)
+//    @Min(0)
     private Integer ratingPoints;
 
     public Integer getRatingPoints() {

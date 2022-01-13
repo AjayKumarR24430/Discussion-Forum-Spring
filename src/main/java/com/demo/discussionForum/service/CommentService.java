@@ -6,7 +6,6 @@ import com.demo.discussionForum.dto.CommentDTO;
 import com.demo.discussionForum.exceptions.CommentException;
 import com.demo.discussionForum.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
